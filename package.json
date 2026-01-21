@@ -1,0 +1,19 @@
+{
+  "name": "orangehrm-playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "runAllTest": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report:open": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9"
+  }
+}
