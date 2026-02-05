@@ -11,7 +11,7 @@ class LoginPage {
 
     //Methods / Functions
     async goto(){
-        await this.page.goto('/login');
+        await this.page.goto('/web/index.php/auth/login');
     }
 
 }
