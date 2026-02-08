@@ -24,5 +24,34 @@ test('Login with valid credentials',async ({page}) => {
     }
 });
 
+test('Login with empty credentials',async ({page}) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.login('', '');
+    await expect(loginPage.usernameErrorMessage).toBeVisible(); 
+    await expect(loginPage.passwordErrorMessage).toBeVisible();
+});
+
+test('UI element should be visible', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await expect(loginPage.usernameInput).toBeVisible();
+    await expect(loginPage.passwordInput).toBeVisible();
+    await expect(loginPage.loginButton).toBeVisible();
+    await expect(loginPage.forgotPasswordLink).toBeVisible();
+});
+
+test.only('Login button should be enabled' , async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await expect(loginPage.loginButton).toBeEnabled();
+});
+
+test.only('Password field should be masked', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await expect(loginPage.passwordInput).toHaveAttribute('type', 'password');
+});
+
 
 
