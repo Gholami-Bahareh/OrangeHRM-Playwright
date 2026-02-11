@@ -41,13 +41,13 @@ test('UI element should be visible', async ({ page }) => {
     await expect(loginPage.forgotPasswordLink).toBeVisible();
 });
 
-test.only('Login button should be enabled' , async ({ page }) => {
+test('Login button should be enabled' , async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
     await expect(loginPage.loginButton).toBeEnabled();
 });
 
-test.only('Password field should be masked', async ({ page }) => {
+test('Password field should be masked', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
     await expect(loginPage.passwordInput).toHaveAttribute('type', 'password');

@@ -1,0 +1,13 @@
+const {test, expect} = require('@playwright/test');
+const {LoginPage} = require('../page-objects/LoginPage');
+const {DashboardPage} = require('../page-objects/DashboardPage');
+
+
+test.only('Successful login redirects user to dashboard',async ({page}) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.login('Admin', 'admin123');
+    const dashboardPage = new DashboardPage(page);
+    await expect(page).toHaveURL('/web/index.php/dashboard/index');
+    await expect(dashboardPage.accountDropdown).toBeVisible();  
+});
