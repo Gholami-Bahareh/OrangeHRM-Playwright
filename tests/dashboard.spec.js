@@ -12,7 +12,7 @@ test('Successful login redirects user to dashboard',async ({page}) => {
     await expect(dashboardPage.accountDropdown).toBeVisible();  
 });
 
-test.only('Successful logout redirects user to login page', async ({page}) => {
+test('Successful logout redirects user to login page', async ({page}) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
     await loginPage.login('Admin', 'admin123');
