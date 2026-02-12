@@ -21,6 +21,10 @@ class DashboardPage {
         await this.page.goto('/');
     }   
 
+    async isAt(){
+        await expect(this.dashboardBreadcrump).toHaveText('Dashboard');
+    }
+
 };
 
 module.exports = { DashboardPage };
