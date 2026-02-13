@@ -7,8 +7,6 @@ test('authenticate',async ({page}) => {
     
     await page.waitForURL('/web/index.php/dashboard/index');
 
-    console.log('Dashboard URL:', page.url());
-
     await page.context().storageState({
         path: '.auth/auth.json'
     });
