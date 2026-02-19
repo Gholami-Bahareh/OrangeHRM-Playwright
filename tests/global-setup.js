@@ -5,7 +5,7 @@ import { LoginPage } from '../page-objects/LoginPage.js';
 
 export default async () => {
   // مرورگر رو لانچ می‌کنیم
-  const browser = await chromium.launch({ headless: false });
+  const browser = await chromium.launch();
 
   // ⚡️ ایجاد context با baseURL
   const context = await browser.newContext({
