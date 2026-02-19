@@ -8,10 +8,21 @@ test.only('Successful login redirects user to dashboard',async ({authenticatedPa
         
     const dashboardPage = new DashboardPage(authenticatedPage);
 
-    
 
     await expect(authenticatedPage).toHaveURL('/web/index.php/dashboard/index');
     await expect(dashboardPage.accountDropdown).toBeVisible();  
+    await expect(dashboardPage.timeAtWorkWidget).toBeVisible();
+    await expect(dashboardPage.myActionWidget).toBeVisible();
+    await expect(dashboardPage.quickLaunchWidget).toBeVisible();
+    await dashboardPage.interactiveElementsInQuickLaunchWidget.first().waitFor({ state: 'visible' });
+
+    const count = await dashboardPage.interactiveElementsInQuickLaunchWidget.count();
+    expect(count).toBeGreaterThan(0);
+
+    await expect(dashboardPage.interactiveElementsInQuickLaunchWidget.first()).toBeEnabled();
+
+    
+    
 });
 
 test('Successful logout redirects user to login page', async ({page}) => {
