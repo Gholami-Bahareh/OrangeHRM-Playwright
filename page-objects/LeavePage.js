@@ -4,7 +4,10 @@ class LeavePage {
 
         //Locators
         this.leaveBreadcrump = page.locator('.oxd-topbar-header-breadcrumb');
+        this.myLeaveList = page.getByText('My Leave List');
+       
     }
+
 
     //Methods / Functions
 

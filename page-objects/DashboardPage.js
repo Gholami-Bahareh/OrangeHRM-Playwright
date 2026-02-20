@@ -10,11 +10,13 @@ class DashboardPage {
         this.myActionWidget = page.getByText('My Actions'); 
         this.quickLaunchWidget = page.locator('.orangehrm-dashboard-widget').filter({ hasText: 'Quick Launch' }).first();
         this.interactiveElementsInQuickLaunchWidget = this.quickLaunchWidget.locator('button');  
-
+        this.quickLaunchWidgetAssignLeaveButton = page.locator('.orangehrm-quick-launch-card').filter({hasText: 'Assign Leave'}); 
+        this.quickLaunchWidgetMyLeaveButton = page.locator('.orangehrm-quick-launch-card').filter({hasText: 'My Leave'});
+        this.menuePMI = page.locator('a[href="/web/index.php/pim/viewPimModule"]')
 
     }   
 
-    //Methods / Functions
+    //Methods / Functions   
     async logOut(){
         await this.accountDropdown.click();
         await this.logoutLink.click();

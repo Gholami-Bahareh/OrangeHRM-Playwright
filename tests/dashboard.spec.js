@@ -32,17 +32,29 @@ test('Successful logout redirects user to login page', async ({page}) => {
     await expect(page).toHaveURL('/web/index.php/auth/login');
 });
 
-test.only('click on Leave',async ({authenticatedPage}) => {
+test('Quick Launch: Assign Leave action navigates to Assign Leave page',async ({authenticatedPage}) => {
         
     const dashboardPage = new DashboardPage(authenticatedPage);
     const leavePage = new LeavePage(authenticatedPage);
 
     await expect(dashboardPage.quickLaunchWidget).toBeVisible();
     await dashboardPage.interactiveElementsInQuickLaunchWidget.first().waitFor({ state: 'visible' });
-    await dashboardPage.interactiveElementsInQuickLaunchWidget.first().click();
+    await dashboardPage.quickLaunchWidgetAssignLeaveButton.click();
 
-    
-    await expect(authenticatedPage).toHaveURL('web/index.php/leave/assignLeave');
+    await expect(authenticatedPage).toHaveURL(/leave\/assignLeave/);
     await expect(leavePage.leaveBreadcrump).toBeVisible();
-  
+    await expect(leavePage.leaveBreadcrump).toHaveText('Leave'); 
+});
+
+test('Quick Launch: Assign Leave action navigates to My Leave page',async ({authenticatedPage}) => {
+        
+    const dashboardPage = new DashboardPage(authenticatedPage);
+    const leavePage = new LeavePage(authenticatedPage);
+
+    await expect(dashboardPage.quickLaunchWidget).toBeVisible();
+    await dashboardPage.interactiveElementsInQuickLaunchWidget.first().waitFor({ state: 'visible' });
+    await dashboardPage.quickLaunchWidgetMyLeaveButton.click();
+
+    await expect(authenticatedPage).toHaveURL(/leave\/viewMyLeaveList/);
+    await expect(leavePage.myLeaveList).toBeVisible();
 });
