@@ -2,9 +2,10 @@ const {expect} = require('@playwright/test');
 const {test} = require('../tests/fixtures');
 const {PMIPage} = require('../page-objects/PMIPage');
 const {DashboardPage} = require('../page-objects/DashboardPage');
+const {randomString} = require('../utils/helper');
 
 
-test.only('Add employee',async ({authenticatedPage}) => {
+test('Add employee',async ({authenticatedPage}) => {
     const dashboardPage = new DashboardPage(authenticatedPage);
     const pmiPage = new PMIPage(authenticatedPage); 
 
@@ -28,4 +29,19 @@ test('Add employee with profile photo',async ({authenticatedPage}) => {
     await pmiPage.addEmployeeHeadline.waitFor({ state: 'visible' });
     await pmiPage.employeeImageUploadInput.setInputFiles('tests/uploads/profile.png');
     await pmiPage.addNewUser();
+});
+
+est.only('Add employee/+assertion',async ({authenticatedPage}) => {
+    const dashboardPage = new DashboardPage(authenticatedPage);
+    const pmiPage = new PMIPage(authenticatedPage); 
+
+    await dashboardPage.menuePMI.click();
+ 
+    await pmiPage.addEmployeeButton.click();
+    await pmiPage.addEmployeeHeadline.waitFor({ state: 'visible' });
+   
+    const firstName = await pmiPage.firstNameInput.fill(randomString(5));
+    const lastName = await pmiPage.lastNameInput.fill(randomString(5));
+    await pmiPage.saveButton.click();
+
 });
