@@ -31,7 +31,7 @@ test('Add employee with profile photo',async ({authenticatedPage}) => {
     await pmiPage.addNewUser();
 });
 
-est.only('Add employee/+assertion',async ({authenticatedPage}) => {
+test.only('Add employee/+assertion',async ({authenticatedPage}) => {
     const dashboardPage = new DashboardPage(authenticatedPage);
     const pmiPage = new PMIPage(authenticatedPage); 
 
@@ -40,8 +40,18 @@ est.only('Add employee/+assertion',async ({authenticatedPage}) => {
     await pmiPage.addEmployeeButton.click();
     await pmiPage.addEmployeeHeadline.waitFor({ state: 'visible' });
    
-    const firstName = await pmiPage.firstNameInput.fill(randomString(5));
-    const lastName = await pmiPage.lastNameInput.fill(randomString(5));
+    const firstName = randomString(5);
+    await pmiPage.firstNameInput.fill(firstName);
+    const lastName = randomString(5);
+    await pmiPage.lastNameInput.fill(lastName);
     await pmiPage.saveButton.click();
+    await pmiPage.employeePersonalDetailsHeadline.waitFor({ state: 'visible' });
+    await expect(authenticatedPage).toHaveURL(/pim\/viewPersonalDetails/);
+    await pmiPage.employeeListButton.click();
+    await expect(authenticatedPage).toHaveURL(/viewEmployeeList/);
+    const employeeFullName = `${firstName}  ${lastName}`;
+    await pmiPage.searchEmployeeByName(employeeFullName);
+    const searchedEmployee = await pmiPage.getEmployeeRowByName(employeeFullName);
+    await expect(searchedEmployee).toBeVisible();
 
 });
